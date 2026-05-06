@@ -1,0 +1,156 @@
+\documentclass[a4paper,12pt,dutch]{article}
+\usepackage{glossaries}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{comment}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{pict2e}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{CJKutf8}
+
+% ----------------------------
+% APA figure/table captions + autoref labels (Dutch)
+% ----------------------------
+\captionsetup{
+  font=small,
+  labelfont=bf,
+  textfont=it
+}
+
+\addto\extrasdutch{%
+  \renewcommand{\figureautorefname}{Figuur}%
+  \renewcommand{\tableautorefname}{Tabel}%
+}
+\renewcommand{\subfigureautorefname}{Figuur}
+
+% Chinese text helper for pdfLaTeX rendering
+\DeclareRobustCommand{\cn}[1]{\begin{CJK*}{UTF8}{gbsn}#1\end{CJK*}}
+
+% ----------------------------
+% Colors + listings (Python only)
+% ----------------------------
+% Kleuren (herbruikbaar)
+\definecolor{lstgray}{HTML}{808080}
+\definecolor{lstblue}{HTML}{007ACC}
+\definecolor{lstgreen}{HTML}{469B00}
+\definecolor{lstbg}{HTML}{F2F2F2}
+
+% ===== Algemene defaults (belangrijk voor afbreken) =====
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  frame=single,
+  tabsize=4,
+  showstringspaces=false,
+  breaklines=true,              % zorgt voor automatisch afbreken
+  breakatwhitespace=false,      % mag midden in woorden afbreken
+  columns=flexible,             % voorkomt overflow buiten het kader
+  keepspaces=true,              % behoudt inspringing
+  numbers=left,
+  numberstyle=\tiny\color{lstgray},
+  numbersep=5pt,
+  extendedchars=true,
+  literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1
+           {_}{{\_}}1           % belangrijk voor Python-variabelen
+           {=}{{=}}1
+}
+
+% --------
+% Python stijl (voor jouw squat GUI code)
+% --------
+\lstdefinestyle{Python}{
+  language=Python,
+  keywordstyle=\color{lstblue},
+  stringstyle=\color{lstgreen},
+  commentstyle=\color{lstgray},
+  backgroundcolor=\color{lstbg},
+  rulecolor=\color{black!40},
+  frameround=tttt,
+  framexleftmargin=6pt,
+  framexrightmargin=6pt,
+  framextopmargin=6pt,
+  framexbottommargin=6pt,
+  breaklines=true,
+  breakatwhitespace=false,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+}
+
+% ----------------------------
+% biblatex APA (unchanged)
+% ----------------------------
+\usepackage[
+  style=apa,
+  backend=biber,
+  natbib=true,
+  backref=true,
+  backrefstyle=none,
+  sortcites=true,
+  sorting=nyt,
+  doi=false,
+  maxcitenames=3,
+  language=american
+]{biblatex}
+\DeclareLanguageMapping{dutch}{dutch-apa}
+\addbibresource{Main/construction/Sources.bib}
+
+\DefineBibliographyStrings{dutch}{
+    backrefpage = {blz.},
+    backrefpages = {blz.},
+}
+
+\makeglossaries
+\definecolor{Grey1}{HTML}{343434}
+
+\graphicspath{{./Media/Figuren/}}
+
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+\sisetup{
+  range-phrase = --,
+  range-units  = single,
+  table-number-alignment = center,
+  table-text-alignment  = center
+}
+
+\begin{document}
+\include{Main/construction/frontpage}
+\maketitle
+\include{Main/construction/version}
+\include{Main/construction/toc}
+\include{Main/construction/lof}
+
+\include{Main/sections/Inleiding}
+
+\include{Main/construction/Appendix}
+\include{Main/construction/glossary}
+\include{Main/construction/sources}
+\end{document}
